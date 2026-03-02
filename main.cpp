@@ -1,37 +1,37 @@
 #include <iostream>
-#include <fstream>
+#include <vector>
 #include <string>
+#include <fstream>
 
-// Struktur data untuk Akun Selamanya Master
-struct Player {
-    std::string username;
-    std::string password;
-    int point;
+// Struktur data untuk mengelola memori pendakian Master
+struct Progress {
+    int score;
+    std::string checkpoint_name;
+    float position_x;
+    float position_y;
+};
+
+class ClimbEngine {
+public:
+    void saveToJohnson(std::string username, Progress p) {
+        std::ofstream file;
+        file.open("database.json", std::ios::app);
+        if (file.is_open()) {
+            file << "{\"user\":\"" << username << "\", \"score\":" << p.score << "}\n";
+            file.close();
+            std::cout << "Data Master berhasil disimpan ke Gudang JSON." << std::endl;
+        }
+    }
+    
+    void talkToBapakNPC() {
+        std::cout << "Bapak NPC: Halo Master, mau simpan progres?" << std::endl;
+    }
 };
 
 int main() {
-    Player newPlayer;
-    
-    std::cout << "--- CLIMB 2: SISTEM GUDANG C++ ---" << std::endl;
-    std::cout << "Masukkan Username Acak: ";
-    std::cin >> newPlayer.username;
-    std::cout << "Masukkan Password: ";
-    std::cin >> newPlayer.password;
-    newPlayer.point = 0; // Mulai dari dasar tebing
-
-    // Proses simpan ke "Gudang" database.json
-    std::ofstream file;
-    file.open("database.json", std::ios::app); // ios::app supaya data lama nggak kehapus
-    
-    if (file.is_open()) {
-        file << "{\"username\":\"" << newPlayer.username 
-             << "\", \"password\":\"" << newPlayer.password 
-             << "\", \"point\":" << newPlayer.point << "}\n";
-        file.close();
-        std::cout << "\n✅ DATA BERHASIL DISIMPAN PERMANEN DI JOHNSON!" << std::endl;
-    } else {
-        std::cout << "❌ Gagal membuka gudang data." << std::endl;
-    }
-
+    ClimbEngine engine;
+    Progress currentProgress = {100, "Tebing Curam", 25.5, 50.0};
+    engine.talkToBapakNPC();
+    engine.saveToJohnson("Master_User", currentProgress);
     return 0;
 }

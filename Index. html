@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Climb: The Path of JSON</title>
+    <style>
+        body { margin: 0; overflow: hidden; background: #000; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: white; }
+        
+        /* Tampilan Lobby & Login */
+        #lobby { 
+            position: fixed; width: 100%; height: 100%; background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 100;
+        }
+        .login-box { background: rgba(255,255,255,0.1); padding: 30px; border-radius: 15px; border: 1px solid #8b5cf6; text-align: center; }
+        input { display: block; width: 200px; padding: 10px; margin: 10px 0; border-radius: 5px; border: none; }
+        .btn { 
+            padding: 12px 25px; margin: 10px; border: none; border-radius: 8px; cursor: pointer; 
+            font-weight: bold; transition: 0.3s; width: 220px;
+        }
+        .btn-primary { background: #8b5cf6; color: white; }
+        .btn-secondary { background: #475569; color: white; }
+        
+        /* UI Game */
+        #gameUI { position: fixed; top: 10px; left: 10px; display: none; pointer-events: none; }
+        canvas { display: none; background: #020617; margin: auto; }
+        
+        /* Kontrol HP */
+        .controls { position: fixed; bottom: 20px; left: 10px; right: 10px; display: none; justify-content: space-between; }
+        .ctrl-btn { width: 65px; height: 65px; background: rgba(139, 92, 246, 0.3); border: 2px solid #8b5cf6; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div id="lobby">
+        <h1 style="text-shadow: 0 0 20px #8b5cf6;">CLIMB: THE PATH OF JSON</h1>
+        <div class="login-box" id="loginArea">
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Password">
+            <button class="btn btn-primary" onclick="auth('permanent')">LOGIN AKUN SELAMANYA</button>
+            <button class="btn btn-secondary" onclick="auth('guest')">MASUK SEBAGAI TAMU</button>
+        </div>
+        
+        <div id="modeSelect" style="display:none; text-align:center;">
+            <h3>Pilih Tingkat Kesulitan:</h3>
+            <button class="btn btn-secondary" onclick="start('easy')">EASY</button>
+            <button class="btn btn-secondary" onclick="start('normal')">NORMAL</button>
+            <button class="btn btn-primary" onclick="start('hard')">HARD (90% SUSAH)</button>
+        </div>
+    </div>
+
+    <div id="gameUI">
+        AKUN: <span id="userDisp"></span> | SKOR: <span id="scoreVal">0</span> / 1000
+    </div>
+    <canvas id="gameCanvas"></canvas>
+
+    <div class="controls" id="gameControls">
+        <div style="display:flex; gap:10px;">
+            <div class="ctrl-btn" id="lBtn">LEFT</div>
+            <div class="ctrl-btn" id="rBtn">RIGHT</div>
+        </div>
+        <div class="ctrl-btn" id="jBtn">JUMP</div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        let userType = "";
+
+        // Fungsi Login & "Gudang" Data
+        function auth(type) {
+            userType = type;
+            const user = document.getElementById('username').value || "Tamu";
+            document.getElementById('userDisp').innerText = user + (type === 'permanent' ? " (PERMANEN)" : " (GUEST)");
+            document.getElementById('loginArea').style.display = 'none';
+            document.getElementById('modeSelect').style.display = 'block';
+        }
+
+        function start(mode) {
+            document.getElementById('lobby').style.display = 'none';
+            canvas.style.display = 'block';
+            document.getElementById('gameUI').style.display = 'block';
+            document.getElementById('gameControls').style.display = 'flex';
+            initGame(mode);
+        }
+
+        // --- Logika Game Sederhana (Akan dikembangkan ke Python + JSON) ---
+        let score = 0;
+        function initGame(mode) {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            // Di sini nanti kita panggil Python/JSON untuk load progres bapak-bapak checkpoint
+            loop();
+        }
+
+        function loop() {
+            ctx.clearRect(0,0, canvas.width, canvas.height);
+            ctx.fillStyle = "#8b5cf6";
+            ctx.fillRect(window.innerWidth/2 - 15, canvas.height - 100, 30, 30); // Player sementara
+            requestAnimationFrame(loop);
+        }
+    </script>
+</body>
+</html>

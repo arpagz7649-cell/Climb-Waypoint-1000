@@ -3,68 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLIMB: THE PATH OF JSON - OFFICIAL GAME</title>
+    <title>CLIMB: THE PATH OF JSON - CORE SYSTEM</title>
     <style>
-        /* Desain UI Lobby yang Sangat Detail */
-        body { 
-            background: #020617; color: #a78bfa; font-family: 'Segoe UI', sans-serif; 
-            margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; 
-        }
-        .main-container { width: 100%; max-width: 800px; padding: 50px 20px; text-align: center; }
-        .hero-section { border-bottom: 2px solid #8b5cf6; padding-bottom: 30px; margin-bottom: 40px; }
-        .game-card { 
-            background: rgba(139, 92, 246, 0.05); border: 2px solid #8b5cf6; 
-            border-radius: 24px; padding: 40px; box-shadow: 0 10px 50px rgba(0,0,0,0.5); 
-        }
-        .input-field { 
-            width: 80%; padding: 15px; margin: 15px 0; border-radius: 12px; 
-            border: 1px solid #4c1d95; background: #0f172a; color: #fff; font-size: 16px; 
-        }
-        .btn-glow { 
-            background: #8b5cf6; color: white; border: none; padding: 18px 40px; 
-            border-radius: 12px; font-weight: 800; cursor: pointer; font-size: 18px; 
-            transition: all 0.4s; box-shadow: 0 0 20px rgba(139, 92, 246, 0.4); 
-        }
-        .info-text { font-size: 14px; color: #64748b; margin-top: 25px; line-height: 1.6; }
+        body { background: #020617; color: #8b5cf6; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; }
+        .wrapper { width: 100%; max-width: 1200px; padding: 60px 20px; }
+        .main-card { background: rgba(15, 23, 42, 0.8); border: 3px solid #8b5cf6; border-radius: 30px; padding: 50px; box-shadow: 0 0 60px rgba(139, 92, 246, 0.2); text-align: center; }
+        h1 { font-size: 3.5rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 5px; }
+        .input-group { margin: 25px 0; }
+        input { width: 85%; padding: 20px; border-radius: 15px; border: 2px solid #4c1d95; background: #0f172a; color: #fff; font-size: 18px; margin-bottom: 15px; }
+        .btn-action { background: #8b5cf6; color: #fff; border: none; padding: 22px 50px; border-radius: 15px; font-weight: 900; cursor: pointer; font-size: 20px; text-transform: uppercase; transition: 0.3s; width: 90%; }
+        .btn-action:hover { background: #7c3aed; box-shadow: 0 0 30px #8b5cf6; transform: translateY(-3px); }
+        .system-logs { margin-top: 40px; padding: 20px; background: #000; border-radius: 10px; border: 1px solid #334155; text-align: left; font-family: monospace; font-size: 13px; color: #10b981; height: 150px; overflow-y: auto; }
+        .article-section { margin-top: 60px; text-align: left; color: #94a3b8; line-height: 1.8; }
+        footer { margin-top: 100px; padding: 40px; border-top: 1px solid #1e293b; width: 100%; text-align: center; font-size: 14px; opacity: 0.6; }
     </style>
 </head>
 <body>
 
-    <div class="main-container">
-        <header class="hero-section">
-            <h1>🏔️ CLIMB: THE PATH OF JSON</h1>
-            <p>Sistem Pendakian Berbasis Data Permanen dan Gudang JSON Pintar</p>
+    <div class="wrapper">
+        <header class="main-card">
+            <h1>CLIMB: THE PATH OF JSON</h1>
+            <p>ADVANCED DATA PERSISTENCE & CLIMBING SIMULATION SYSTEM</p>
+            
+            <div class="input-group">
+                <input type="text" id="uName" placeholder="ENTER UNIQUE USERNAME">
+                <input type="password" id="uPass" placeholder="ENTER SECURE PASSWORD">
+                <button class="btn-action" onclick="gatekeeper()">ACCESS PERMANENT ACCOUNT</button>
+            </div>
+
+            <div class="system-logs" id="logs">
+                [SYSTEM]: Waiting for user input...<br>
+                [INFO]: Database connection to 'Johnson' JSON is ready.<br>
+                [INFO]: Go Engine initialized on port 8080.
+            </div>
         </header>
 
-        <main class="game-card">
-            <h2>SELAMAT DATANG, PENDAKI</h2>
-            <p>Silakan masukkan identitas untuk mengakses Akun Selamanya Anda.</p>
+        <section class="article-section">
+            <h2>DOKUMENTASI SISTEM PENDAKIAN</h2>
+            <p>Proyek ini merupakan simulasi pendakian tebing yang mengintegrasikan teknologi <strong>Golang</strong> untuk manajemen backend dan <strong>JSON</strong> sebagai media penyimpanan data utama. Setiap pengguna memiliki hak untuk membuat akun permanen di mana seluruh progres pendakian akan dicatat secara mendetail ke dalam gudang data.</p>
             
-            <div class="form-area">
-                <input type="text" id="userBox" class="input-field" placeholder="Username Pilihan Anda...">
-                <input type="password" id="passBox" class="input-field" placeholder="Password Rahasia...">
-                <br><br>
-                <button class="btn-glow" onclick="aksesGudang()">MULAI PENDAKIAN</button>
-            </div>
+            <h3>MEKANISME CHECKPOINT NPC</h3>
+            <p>Dalam perjalanan menuju puncak 1000 poin, pendaki akan bertemu dengan berbagai NPC bapak-bapak yang bertugas sebagai penjaga checkpoint. Interaksi dengan NPC ini sangat krusial karena akan memicu fungsi <i>SaveState</i> yang dikirimkan oleh <strong>JavaScript</strong> menuju mesin <strong>Go</strong> untuk kemudian ditulis ke dalam file <strong>database.json</strong>.</p>
 
-            <div class="info-text">
-                <strong>Tentang Teknologi:</strong> Game ini menggunakan integrasi <b>Go (Golang)</b> untuk pemrosesan backend 
-                dan <b>JSON (Johnson)</b> sebagai gudang penyimpanan data permanen. Setiap progres yang Master capai 
-                akan disimpan secara aman di dalam database.
-            </div>
-        </main>
+            <h3>KEAMANAN DATA PERMANEN</h3>
+            <p>Sistem otentikasi dirancang untuk menangani username acak secara dinamis. Data yang disimpan meliputi koordinat posisi (X, Y), total poin, dan daftar inventaris kostum karakter. Dengan kombinasi Go dan JS, transmisi data menjadi sangat cepat dan efisien.</p>
+        </section>
 
-        <footer style="margin-top: 50px; opacity: 0.5; font-size: 12px;">
-            <p>Dibuat oleh Master Proyek | Versi 2.1.0 | Menggunakan Cloud Database Integration</p>
+        <footer>
+            <p>© 2026 THE CLIMB PROJECT - DEVELOPED BY MASTER SYSTEM</p>
+            <p>POWERED BY GOVERNANCE, JAVASCRIPT ENGINE, AND JSON PERSISTENCE STORE</p>
         </footer>
     </div>
 
     <script>
-        function aksesGudang() {
-            const u = document.getElementById('userBox').value;
-            if(!u) return alert("Isi Username dulu!");
-            alert("Menghubungkan Akun " + u + " ke Gudang JSON...");
-            // Logika selanjutnya akan diproses oleh main.go Master
+        function gatekeeper() {
+            const user = document.getElementById('uName').value;
+            const log = document.getElementById('logs');
+            if(!user) {
+                log.innerHTML += "<br>[ERROR]: Username is required!";
+                return;
+            }
+            log.innerHTML += `<br>[SUCCESS]: Connecting ${user} to the JSON Warehouse...`;
+            // Integrasi ke main.go akan dilakukan di sini
         }
     </script>
 </body>

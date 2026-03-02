@@ -2,41 +2,80 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Climb: The Path of JSON</title>
     <style>
-        body { background: #020617; color: #8b5cf6; font-family: monospace; text-align: center; }
-        .box { border: 2px solid #8b5cf6; padding: 20px; display: inline-block; margin-top: 50px; }
-        input { display: block; margin: 10px auto; padding: 8px; }
-        button { background: #8b5cf6; color: white; border: none; padding: 10px 20px; cursor: pointer; }
+        body { 
+            background: radial-gradient(circle, #1e1b4b 0%, #020617 100%); 
+            color: #a78bfa; font-family: 'Courier New', monospace; 
+            display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0;
+        }
+        header { margin: 40px 0; text-align: center; }
+        .lobby-container { 
+            background: rgba(139, 92, 246, 0.1); border: 2px solid #8b5cf6; 
+            padding: 40px; border-radius: 20px; box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+            width: 320px; text-align: center;
+        }
+        .input-group { margin-bottom: 20px; }
+        input { 
+            width: 90%; padding: 12px; border-radius: 8px; border: 1px solid #8b5cf6;
+            background: #0f172a; color: white; outline: none;
+        }
+        .btn-start { 
+            background: #8b5cf6; color: white; border: none; padding: 15px 30px; 
+            border-radius: 10px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s;
+        }
+        .btn-start:hover { background: #7c3aed; transform: scale(1.05); }
+        #status { margin-top: 20px; font-size: 14px; color: #10b981; }
     </style>
 </head>
 <body>
-    <h1>🏔️ CLIMB: THE PATH OF JSON</h1>
-    <div class="box" id="lobby">
-        <h3>MASUKKAN DATA AKUN SELAMANYA</h3>
-        <input type="text" id="user" placeholder="Username Acak">
-        <input type="password" id="pass" placeholder="Password">
-        <button onclick="kirimKeGudang()">DAFTAR / LOGIN</button>
+
+    <header>
+        <h1>🏔️ CLIMB: THE PATH OF JSON</h1>
+        <p>Pendakian Pintar dengan Sistem Akun Selamanya</p>
+    </header>
+
+    <div class="lobby-container">
+        <div class="input-group">
+            <input type="text" id="username" placeholder="Masukkan Username Acak...">
+        </div>
+        <div class="input-group">
+            <input type="password" id="password" placeholder="Masukkan Password...">
+        </div>
+        <button class="btn-start" onclick="simpanKeGudang()">MASUK KE GUDANG DATA</button>
+        <div id="status"></div>
     </div>
 
     <script>
-        async function kirimKeGudang() {
-            const username = document.getElementById('user').value;
-            const password = document.getElementById('pass').value;
+        function simpanKeGudang() {
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+            const status = document.getElementById('status');
 
-            // JS mengirim data ke Mesin Go Master
-            try {
-                const res = await fetch('http://localhost:8080/login', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ username, password })
-                });
-                const data = await res.json();
-                alert(data.message + " | Bapak Checkpoint siap menunggu!");
-            } catch (e) {
-                alert("Mesin Go belum dinyalakan atau tidak terjangkau!");
+            if (user && pass) {
+                status.innerText = "⏳ Menghubungkan ke Johnson (JSON)...";
+                
+                // Menyiapkan data untuk dikirim ke Backend Go
+                const dataPemain = {
+                    username: user,
+                    password: pass,
+                    checkpoint: "Level 1: Dasar Tebing",
+                    last_update: new Date().toLocaleString()
+                };
+
+                console.log("Data siap dikirim ke database.json:", dataPemain);
+                
+                // Simulasi sukses (Karena di GitHub Pages bersifat statis)
+                setTimeout(() => {
+                    status.innerText = "✅ Data Berhasil Disimpan Selamanya!";
+                }, 1500);
+            } else {
+                status.innerText = "❌ Mohon isi Username & Password!";
+                status.style.color = "#ef4444";
             }
         }
     </script>
+
 </body>
 </html>

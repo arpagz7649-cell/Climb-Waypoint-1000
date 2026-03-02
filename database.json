@@ -1,8 +1,17 @@
 {
-  "registered_players": [],
-  "guest_sessions": 0,
-  "game_metadata": {
-    "title": "Climb: The Path of JSON",
-    "total_climbers": 0
-  }
+  "project_name": "Climb: The Path of JSON",
+  "storage_type": "Permanent Data Persistence",
+  "active_sessions": [],
+  "registered_climbers": [
+    {
+      "username": "Pemain_Awal",
+      "password": "hashed_password_123",
+      "status": "permanent",
+      "progress": {
+        "score": 0,
+        "checkpoint": "Pintu Gerbang",
+        "position": {"x": 0, "y": 0}
+      }
+    }
+  ]
 }

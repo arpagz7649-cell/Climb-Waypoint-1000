@@ -1,4 +1,3 @@
-# Paksa GitHub anggap C++ sebagai dokumentasi saja
-*.cpp linguist-documentation=true
-# Paksa GitHub anggap HTML sebagai bahasa utama
 *.html linguist-detectable=true
+*.cpp linguist-detectable=true
+*.js linguist-detectable=true

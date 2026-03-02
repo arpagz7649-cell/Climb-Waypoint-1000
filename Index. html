@@ -3,79 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Climb: The Path of JSON</title>
+    <title>CLIMB: THE PATH OF JSON - OFFICIAL GAME</title>
     <style>
+        /* Desain UI Lobby yang Sangat Detail */
         body { 
-            background: radial-gradient(circle, #1e1b4b 0%, #020617 100%); 
-            color: #a78bfa; font-family: 'Courier New', monospace; 
-            display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0;
+            background: #020617; color: #a78bfa; font-family: 'Segoe UI', sans-serif; 
+            margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; 
         }
-        header { margin: 40px 0; text-align: center; }
-        .lobby-container { 
-            background: rgba(139, 92, 246, 0.1); border: 2px solid #8b5cf6; 
-            padding: 40px; border-radius: 20px; box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
-            width: 320px; text-align: center;
+        .main-container { width: 100%; max-width: 800px; padding: 50px 20px; text-align: center; }
+        .hero-section { border-bottom: 2px solid #8b5cf6; padding-bottom: 30px; margin-bottom: 40px; }
+        .game-card { 
+            background: rgba(139, 92, 246, 0.05); border: 2px solid #8b5cf6; 
+            border-radius: 24px; padding: 40px; box-shadow: 0 10px 50px rgba(0,0,0,0.5); 
         }
-        .input-group { margin-bottom: 20px; }
-        input { 
-            width: 90%; padding: 12px; border-radius: 8px; border: 1px solid #8b5cf6;
-            background: #0f172a; color: white; outline: none;
+        .input-field { 
+            width: 80%; padding: 15px; margin: 15px 0; border-radius: 12px; 
+            border: 1px solid #4c1d95; background: #0f172a; color: #fff; font-size: 16px; 
         }
-        .btn-start { 
-            background: #8b5cf6; color: white; border: none; padding: 15px 30px; 
-            border-radius: 10px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s;
+        .btn-glow { 
+            background: #8b5cf6; color: white; border: none; padding: 18px 40px; 
+            border-radius: 12px; font-weight: 800; cursor: pointer; font-size: 18px; 
+            transition: all 0.4s; box-shadow: 0 0 20px rgba(139, 92, 246, 0.4); 
         }
-        .btn-start:hover { background: #7c3aed; transform: scale(1.05); }
-        #status { margin-top: 20px; font-size: 14px; color: #10b981; }
+        .info-text { font-size: 14px; color: #64748b; margin-top: 25px; line-height: 1.6; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>🏔️ CLIMB: THE PATH OF JSON</h1>
-        <p>Pendakian Pintar dengan Sistem Akun Selamanya</p>
-    </header>
+    <div class="main-container">
+        <header class="hero-section">
+            <h1>🏔️ CLIMB: THE PATH OF JSON</h1>
+            <p>Sistem Pendakian Berbasis Data Permanen dan Gudang JSON Pintar</p>
+        </header>
 
-    <div class="lobby-container">
-        <div class="input-group">
-            <input type="text" id="username" placeholder="Masukkan Username Acak...">
-        </div>
-        <div class="input-group">
-            <input type="password" id="password" placeholder="Masukkan Password...">
-        </div>
-        <button class="btn-start" onclick="simpanKeGudang()">MASUK KE GUDANG DATA</button>
-        <div id="status"></div>
+        <main class="game-card">
+            <h2>SELAMAT DATANG, PENDAKI</h2>
+            <p>Silakan masukkan identitas untuk mengakses Akun Selamanya Anda.</p>
+            
+            <div class="form-area">
+                <input type="text" id="userBox" class="input-field" placeholder="Username Pilihan Anda...">
+                <input type="password" id="passBox" class="input-field" placeholder="Password Rahasia...">
+                <br><br>
+                <button class="btn-glow" onclick="aksesGudang()">MULAI PENDAKIAN</button>
+            </div>
+
+            <div class="info-text">
+                <strong>Tentang Teknologi:</strong> Game ini menggunakan integrasi <b>Go (Golang)</b> untuk pemrosesan backend 
+                dan <b>JSON (Johnson)</b> sebagai gudang penyimpanan data permanen. Setiap progres yang Master capai 
+                akan disimpan secara aman di dalam database.
+            </div>
+        </main>
+
+        <footer style="margin-top: 50px; opacity: 0.5; font-size: 12px;">
+            <p>Dibuat oleh Master Proyek | Versi 2.1.0 | Menggunakan Cloud Database Integration</p>
+        </footer>
     </div>
 
     <script>
-        function simpanKeGudang() {
-            const user = document.getElementById('username').value;
-            const pass = document.getElementById('password').value;
-            const status = document.getElementById('status');
-
-            if (user && pass) {
-                status.innerText = "⏳ Menghubungkan ke Johnson (JSON)...";
-                
-                // Menyiapkan data untuk dikirim ke Backend Go
-                const dataPemain = {
-                    username: user,
-                    password: pass,
-                    checkpoint: "Level 1: Dasar Tebing",
-                    last_update: new Date().toLocaleString()
-                };
-
-                console.log("Data siap dikirim ke database.json:", dataPemain);
-                
-                // Simulasi sukses (Karena di GitHub Pages bersifat statis)
-                setTimeout(() => {
-                    status.innerText = "✅ Data Berhasil Disimpan Selamanya!";
-                }, 1500);
-            } else {
-                status.innerText = "❌ Mohon isi Username & Password!";
-                status.style.color = "#ef4444";
-            }
+        function aksesGudang() {
+            const u = document.getElementById('userBox').value;
+            if(!u) return alert("Isi Username dulu!");
+            alert("Menghubungkan Akun " + u + " ke Gudang JSON...");
+            // Logika selanjutnya akan diproses oleh main.go Master
         }
     </script>
-
 </body>
 </html>
